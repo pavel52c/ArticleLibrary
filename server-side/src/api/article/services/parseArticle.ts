@@ -27,7 +27,7 @@ const parseArticle = async ({ url }) => {
   }, webSites);
 
   await browser.close();
-  return prepareBeforeResponse({ ...result, webSite: webSites[0] });
+  return prepareBeforeResponse({ ...result, webSite: webSites.scienceDirect });
 };
 
 export default {

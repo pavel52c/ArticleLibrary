@@ -1,14 +1,16 @@
 import { isEmpty } from "lodash";
 import DOMParser from "universal-dom-parser";
-import { AbstractChunk, AbstractProps } from "../../models/AbstractModel";
+import { AbstractChunk, AbstractProps } from "../../../../models/AbstractModel";
+import { scienceDirect } from "../constants";
 
 export const prepareAbstract = ({
   abstract,
-  abstractParse,
 }: AbstractProps): AbstractChunk[] => {
   const parser = new DOMParser();
-  const { heading, text: textParse } = abstractParse;
   return abstract.map((abs) => {
+    const {
+      abstract: { heading, text: textParse },
+    } = scienceDirect;
     const abstractHTML = parser.parseFromString(abs, "text/html");
     const title = Array.from(abstractHTML.getElementsByTagName(heading)).map(
       (heading) => (heading as HTMLHeadingElement).innerHTML

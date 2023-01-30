@@ -1,12 +1,11 @@
 import { ReferenceModel } from "./referencesModel";
 import { AbstractChunk } from "./AbstractModel";
-import { WebSiteModel } from "./webSiteModel";
 
 export interface PrepareResponseModelProps {
   header: string;
   abstract: string[];
   referenceSection: string[];
-  webSite: WebSiteModel;
+  webSite: string;
 }
 
 export interface ParsingResponseModel {

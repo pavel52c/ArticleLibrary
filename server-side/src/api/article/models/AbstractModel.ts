@@ -7,5 +7,4 @@ export interface AbstractChunk {
 
 export interface AbstractProps {
   abstract: string[];
-  abstractParse: AbstractParseModel;
 }

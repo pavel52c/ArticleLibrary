@@ -2,8 +2,7 @@ import {
   ParsingResponseModel,
   PrepareResponseModelProps,
 } from "../../models/parsingResponseModel";
-import { prepareAbstract } from "./prepareAbstract";
-import { prepareReferences } from "./prepareReferences";
+import ScienceDirectPrepare from "./scienceDirect";
 
 export const prepareBeforeResponse = ({
   header,
@@ -11,15 +10,12 @@ export const prepareBeforeResponse = ({
   referenceSection,
   webSite,
 }: PrepareResponseModelProps): ParsingResponseModel => {
-  return {
-    header,
-    abstract: prepareAbstract({
-      abstract,
-      abstractParse: webSite.abstractParse,
-    }),
-    reference: prepareReferences({
-      referenceSection,
-      referenceParse: webSite.referenceParse,
-    }),
-  };
+  switch (webSite) {
+    case "scienceDirect":
+      return {
+        header,
+        abstract: ScienceDirectPrepare.prepareAbstract({ abstract }),
+        reference: ScienceDirectPrepare.prepareReferences({ referenceSection }),
+      };
+  }
 };

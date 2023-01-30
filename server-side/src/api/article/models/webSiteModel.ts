@@ -9,7 +9,5 @@ export interface ReferenceParseModel {
 }
 
 export interface WebSiteModel {
-  header: string;
-  abstractParse: AbstractParseModel;
-  referenceParse: ReferenceParseModel;
+  webSite: string;
 }
