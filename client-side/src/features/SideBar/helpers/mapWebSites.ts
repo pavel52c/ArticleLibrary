@@ -1,4 +1,4 @@
-import { WebSiteModel } from "../../../entities/models/Link/LinkModel";
+import { WebSiteModel } from "../../../entities/Link/model/LinkModel";
 import { DropDownItem } from "../../../shared/ui/InputDropDown/InputDropDown";
 
 export const mapWebSites = (items: WebSiteModel[]): DropDownItem[] => [

@@ -37,7 +37,7 @@ export const InputDropDown = React.memo(
     };
 
     const handleInputClick = () => setShow((prev) => !prev);
-    console.log("item", selectedItem);
+
     return (
       <div className="InputDropDown" ref={ref}>
         <Button

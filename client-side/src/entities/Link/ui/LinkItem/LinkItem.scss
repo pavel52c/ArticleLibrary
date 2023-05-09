@@ -1,0 +1,9 @@
+.LinkItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__description {
+    font-style: italic;
+  }
+}

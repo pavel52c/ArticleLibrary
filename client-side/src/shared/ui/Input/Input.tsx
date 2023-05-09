@@ -5,8 +5,10 @@ export interface InputProps {
   className?: string;
   value?: string;
   onChange?: (value: string) => void;
-  placeHolder?: string;
+  placeholder?: string;
   register?: () => any;
+  type?: string;
+  onKeyDown?: (e: any) => void;
 }
 
 export const Input: React.FC<InputProps> = (props) => {
@@ -14,8 +16,10 @@ export const Input: React.FC<InputProps> = (props) => {
     value = "",
     onChange = () => {},
     className = "",
-    placeHolder = "",
+    placeholder = "",
     register = () => {},
+    type = "text",
+    onKeyDown = () => {},
   } = props;
   const [inputValue, setInputValue] = useState(value);
 
@@ -29,11 +33,12 @@ export const Input: React.FC<InputProps> = (props) => {
   return (
     <input
       {...registerValue}
-      type="text"
+      onKeyDown={onKeyDown}
+      type={type}
       value={inputValue}
       onChange={changeInputValue}
       className={classNames("Input", className)}
-      placeholder={placeHolder}
+      placeholder={placeholder}
     />
   );
 };

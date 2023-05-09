@@ -5,7 +5,7 @@ import { BrowserRouter, Outlet } from "react-router-dom";
 import React from "react";
 import { Container, Header, MainPageWrapper, SideBar } from "../../features";
 import { MainPage } from "../../pages/main/MainPage";
-import { ModalWrapper } from "../../entities/Modal/ModalWrapper";
+import { ModalWrapper } from "../../entities/Auth/ui/Modal/ModalWrapper";
 
 const Layout = () => (
   <Container>

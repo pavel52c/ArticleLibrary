@@ -8,16 +8,32 @@ export const parseFromInput = async ({ url, webSite = '', offset = 0 }) => {
     const page = await browser.newPage();
     await page.goto(`${webSite.url}${url.replaceAll(' ', webSite.separator)}`);
     await page.waitForTimeout(1000);
-    const result = await page.evaluate((webSite) => {
-      const links = document.querySelectorAll(webSite.linkTarget);
-      const tmp = Array.from(links).map((link) => link as HTMLLinkElement);
-      const values = tmp.map((link) => ({
-        title: link.innerText,
-        href: link.href,
-      }));
+    const result = await page.evaluate(
+      ({ webSite, offset }) => {
+        const links = document.querySelectorAll(webSite.linkTarget);
+        const tmp = Array.from(links).map((link) => link as HTMLLinkElement);
+        let values = tmp.map((link) => ({
+          title: link.innerText,
+          url: link.href,
+        }));
 
-      return [...values.slice(offset, offset + 5)];
-    }, webSite);
+        if (webSite.descriptionTarget) {
+          const descriptions = Array.from(
+            document.querySelectorAll('.subtype-srctitle-link > span > span'),
+          ).map((description) => (description as HTMLLinkElement).innerHTML);
+          values = values.map((value, index) => ({
+            ...value,
+            description: descriptions[index],
+          }));
+        }
+
+        return [...values.slice(offset, offset + 5)];
+      },
+      {
+        webSite,
+        offset,
+      },
+    );
 
     await browser.close();
     return result;

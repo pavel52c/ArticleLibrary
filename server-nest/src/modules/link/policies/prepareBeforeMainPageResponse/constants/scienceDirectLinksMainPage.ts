@@ -1,4 +1,5 @@
 export const scienceDirectLinksMainPage = {
   linkTarget: 'a',
-  descriptionTarget: 'anchor-text',
+  titleLinkTarget: 'anchor-text',
+  descriptionTarget: 'u-font-sans',
 };

@@ -1,20 +1,19 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { UsersService } from '../../user/services/users.service';
-import { AuthService } from '../../auth/services/auth.service';
-import { LinkService } from '../../link/services/link.service';
+import { Injectable } from "@nestjs/common";
+import { UsersService } from "../../user/services/users.service";
+import { AuthService } from "../../auth/services/auth.service";
+import { LinkService } from "../../link/services/link.service";
 
 @Injectable()
 export class AppService {
   constructor(
     private readonly userService: UsersService,
     private readonly authService: AuthService,
-    private readonly linksService: LinkService,
+    private readonly linksService: LinkService
   ) {}
 
   async mainPage(request) {
-    const candidate = await this.authService.getUserByToken(request);
-
     try {
+      const candidate = await this.authService.getUserByToken(request);
       const { favoriteTags } = await this.userService.findByName(
         candidate.username,
       );

@@ -2,6 +2,10 @@
   border: none;
   background: transparent;
 
+  input {
+    width: 100%;
+  }
+
   &:focus-visible {
     outline: none;
   }
