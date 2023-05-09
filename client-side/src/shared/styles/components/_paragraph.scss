@@ -1,0 +1,54 @@
+@import "../base/typography";
+
+.Paragraph {
+  width: fit-content;
+
+  &--s {
+    @include Paragraph-s();
+  }
+
+  &--m {
+    @include Paragraph-m();
+  }
+
+  &--l {
+    @include Paragraph-l();
+  }
+
+  &--xl {
+    @include Paragraph-xl();
+  }
+
+  &--regular {
+    @include regularFontWeight();
+  }
+
+  &--medium {
+    @include mediumFontWeight();
+  }
+
+  &--semibold {
+    @include semiboldFontWeight();
+  }
+
+  &--bold {
+    @include boldFontWeight();
+  }
+
+  &--primary {
+    @include primaryColor();
+  }
+  &--secondary {
+    @include secondaryColor();
+  }
+  &--error {
+    @include errorColor();
+  }
+  &--blue {
+    @include blueColor();
+  }
+
+  &--gray {
+    @include grayColor();
+  }
+}

@@ -1,0 +1,38 @@
+@import '../abstracts/variables';
+
+.Button {
+  background: transparent;
+  cursor: pointer;
+  border: none;
+
+  &--s {
+
+  }
+
+  &--m {
+
+  }
+
+  &--l {
+
+  }
+
+  &--primary {
+    background-color: $primary40;
+    padding: 12px;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: $secondary40;
+    }
+  }
+
+  &--secondary {
+    padding: 12px;
+    background-color: transparent;
+  }
+
+  &--fullWidth {
+    width: 100%;
+  }
+}

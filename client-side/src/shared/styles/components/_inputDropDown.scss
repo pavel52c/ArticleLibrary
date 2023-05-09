@@ -1,0 +1,67 @@
+@import '../abstracts/variables';
+
+.InputDropDown {
+  $inputHeight: 44px;
+  position: relative;
+  width: 100%;
+  height: $inputHeight;
+
+  &__selectedItem {
+    display: flex;
+    justify-content: space-between;
+    background-color: $inputBackground;
+    gap: 8px;
+    align-items: center;
+    border-radius: 12px;
+    padding: 12px 16px;
+    width: 100%;
+  }
+
+  &__dropDown {
+    position: absolute;
+    z-index: 5;
+    top: $inputHeight + 8px;
+    background-color: #FAF9FD;
+    border: 1px solid #74777F;
+    border-radius: 12px;
+    width: 100%;
+    padding: 8px 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 320px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $black;
+      border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgb(54, 56, 58);
+    }
+  }
+
+  &__item {
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+
+    &:hover {
+      background-color: $secondary90;
+    }
+  }
+}

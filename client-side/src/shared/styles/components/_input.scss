@@ -1,0 +1,8 @@
+.Input {
+  border: none;
+  background: transparent;
+
+  &:focus-visible {
+    outline: none;
+  }
+}

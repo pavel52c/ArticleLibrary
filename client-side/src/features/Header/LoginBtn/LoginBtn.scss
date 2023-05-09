@@ -1,0 +1,11 @@
+.LoginBtn {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+
+  &__username {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+}

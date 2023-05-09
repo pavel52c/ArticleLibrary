@@ -1,0 +1,82 @@
+@import "../abstracts/variables";
+
+// -----------------------------------------------------------------------------
+// Typography
+// -----------------------------------------------------------------------------
+@mixin regularFontWeight {
+  font-weight: $fontWeightRegular;
+}
+@mixin mediumFontWeight {
+  font-weight: $fontWeightMedium;
+}
+@mixin semiboldFontWeight {
+  font-weight: $fontWeightSemibold;
+}
+@mixin boldFontWeight {
+  font-weight: $fontWeightBold;
+}
+
+// -----------------------------------------------------------------------------
+// Colors
+// -----------------------------------------------------------------------------
+@mixin primaryColor {
+  color: $black;
+}
+
+@mixin secondaryColor {
+  color: $white;
+}
+
+@mixin errorColor {
+  color: $error40;
+}
+
+@mixin blueColor {
+  color: $primary40;
+}
+
+@mixin grayColor {
+  color: $gray;
+}
+
+// -----------------------------------------------------------------------------
+// Paragraphs
+// -----------------------------------------------------------------------------
+@mixin Paragraph-s {
+  font-size: $paragraphFontSize-s;
+  line-height: $paragraphLineHeight-s;
+}
+@mixin Paragraph-m {
+  font-size: $paragraphFontSize-m;
+  line-height: $paragraphLineHeight-m;
+}
+@mixin Paragraph-l {
+  font-size: $paragraphFontSize-l;
+  line-height: $paragraphLineHeight-l;
+}
+@mixin Paragraph-xl {
+  font-size: $paragraphFontSize-xl;
+  line-height: $paragraphLineHeight-xl;
+}
+
+// -----------------------------------------------------------------------------
+// Headings
+// -----------------------------------------------------------------------------
+
+
+@mixin Heading-s {
+  font-size: $headingFontSize-s;
+  line-height: $headingLineHeight-s;
+}
+@mixin Heading-m {
+  font-size: $headingFontSize-m;
+  line-height: $headingLineHeight-m;
+}
+@mixin Heading-l {
+  font-size: $headingFontSize-l;
+  line-height: $headingLineHeight-l;
+}
+@mixin Heading-xl {
+  font-size: $headingFontSize-xl;
+  line-height: $headingLineHeight-xl;
+}

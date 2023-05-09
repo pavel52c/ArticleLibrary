@@ -1,0 +1,34 @@
+// -----------------------------------------------------------------------------
+// This file contains all @font-face declarations, if any.
+// -----------------------------------------------------------------------------
+@font-face {
+  font-family: Inter;
+  src: local("Inter-Regular"), url("../../shared/public/fonts/Inter-Regular.ttf") format('ttf');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local("Inter-Medium"), url("../../shared/public/fonts/Inter-Medium.ttf") format('ttf');
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local("Inter-SemiBold"), url("../../shared/public/fonts/Inter-SemiBold.ttf") format('ttf');
+  font-display: swap;
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter;
+  src: local("Inter-Bold"), url("../../shared/public/fonts/Inter-Bold.ttf") format('ttf');
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
