@@ -1,8 +1,8 @@
 import React from "react";
+import { MainPageImg } from "@/shared/public/images";
+import { FavoriteArticlesImg } from "@/shared/public/images";
+import Paragraph from "@/shared/ui/Paragraph/Paragraph";
 import "./PagesBlock.scss";
-import { MainPageImg } from "../../../shared/public/images";
-import { FavoriteArticlesImg } from "../../../shared/public/images";
-import Paragraph from "../../../shared/ui/Paragraph/Paragraph";
 
 interface PagesBlockProps {}
 

@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
 import { ArticleModel } from "../model/ArticleModel";
-import { axiosBaseQuery } from "../../../shared/helpers/getBaseQuery";
-import { requestMethods } from "../../../shared/helpers/requestMethods";
+import { axiosBaseQuery } from "@/shared/helpers/getBaseQuery";
+import { requestMethods } from "@/shared/helpers/requestMethods";
 
 export const ArticleApi = createApi({
   reducerPath: "ArticleApi",

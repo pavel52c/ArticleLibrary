@@ -1,9 +1,9 @@
 import React from "react";
-import Button from "../../../shared/ui/Button/Button";
-import { useAppDispatch } from "../../../entities/Store/hooks/reduxHooks";
-import { AuthActions } from "../../../entities/Store/reducers/AuthReducer";
-import "./LogoutBtn.scss";
+import { useAppDispatch } from "@/shared/Store/hooks/reduxHooks";
+import { AuthActions } from "@/shared/Store/reducers/AuthReducer";
 import Paragraph from "../../../shared/ui/Paragraph/Paragraph";
+import Button from "@/shared/ui/Button/Button";
+import "./LogoutBtn.scss";
 
 export const LogoutBtn = () => {
   const dispatch = useAppDispatch();

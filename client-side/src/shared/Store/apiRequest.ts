@@ -1,7 +1,7 @@
 import axios from "axios";
-import { BASE_URL } from "../../shared/helpers/getBaseQuery";
+import { BASE_URL } from "../helpers/getBaseQuery";
 import { AppDispatch } from "./store";
-import { requestMethods } from "../../shared/helpers/requestMethods";
+import { requestMethods } from "../helpers/requestMethods";
 
 interface requestParams<RequestParams> {
   data: RequestParams;

@@ -1,7 +1,7 @@
-import { apiRequest } from "../../Store/apiRequest";
-import { requestMethods } from "../../../shared/helpers/requestMethods";
-import { SearchActions } from "../../Store/reducers/SearchReducer";
-import { AppDispatch } from "../../Store/store";
+import { apiRequest } from "@/shared/Store/apiRequest";
+import { requestMethods } from "@/shared/helpers/requestMethods";
+import { SearchActions } from "@/shared/Store/reducers/SearchReducer";
+import { AppDispatch } from "@/shared/Store/store";
 import { SearchLinkParseModel } from "../model/SearchLinkParseModel";
 
 const getLinksForMainPage = (dispatch: AppDispatch) =>

@@ -1,18 +1,19 @@
 import React from "react";
-import Button from "../../../shared/ui/Button/Button";
-import { LoginImg } from "../../../shared/public/images";
-import Heading from "../../../shared/ui/Heading/Heading";
-import { useAppDispatch } from "../../../entities/Store/hooks/reduxHooks";
-import { ModalActions } from "../../../entities/Store/reducers/ModalReducer";
-import "./LoginBtn.scss";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "@/shared/Store/hooks/reduxHooks";
+import { ModalActions } from "@/shared/Store/reducers/ModalReducer";
 import { LogoutBtn } from "../LogoutBtn/LogoutBtn";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../entities/Store/store";
+import { LoginImg } from "@/shared/public/images";
+import Heading from "@/shared/ui/Heading/Heading";
+import Button from "../../../shared/ui/Button/Button";
+import "./LoginBtn.scss";
 
 export const LoginBtn = () => {
   const dispatch = useAppDispatch();
-  const { isLogin } = useSelector((state: RootState) => state.auth);
-  const { username } = useSelector((state: RootState) => state.profile);
+  const { isLogin } = useAppSelector((state) => state.auth);
+  const { username } = useAppSelector((state) => state.profile);
 
   return (
     <Button

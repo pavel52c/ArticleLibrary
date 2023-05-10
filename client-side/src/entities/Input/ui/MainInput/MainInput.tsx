@@ -1,6 +1,6 @@
 import React from "react";
-import { Input, InputProps } from "../../../shared/ui";
-import { SearchImg } from "../../../shared/public/images";
+import { Input, InputProps } from "@/shared/ui";
+import { SearchImg } from "@/shared/public/images";
 import "./MainInput.scss";
 
 type MainInputProps = InputProps & { onSubmit: () => void };

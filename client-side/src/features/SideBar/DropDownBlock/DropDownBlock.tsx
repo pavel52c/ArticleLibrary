@@ -1,10 +1,10 @@
 import React from "react";
-import "./DropDownBlock.scss";
-import Paragraph from "../../../shared/ui/Paragraph/Paragraph";
 import {
   InputDropDown,
   InputDropDownProps,
-} from "../../../shared/ui/InputDropDown/InputDropDown";
+} from "@/shared/ui/InputDropDown/InputDropDown";
+import Paragraph from "@/shared/ui/Paragraph/Paragraph";
+import "./DropDownBlock.scss";
 
 export const DropDownBlock = (props: Partial<InputDropDownProps<unknown>>) => (
   <div className="DropDownBlock">

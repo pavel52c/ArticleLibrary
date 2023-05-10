@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import "./RegistrationModal.scss";
-import Heading from "../../../../../shared/ui/Heading/Heading";
-import { CloseImg } from "../../../../../shared/public/images";
-import Button from "../../../../../shared/ui/Button/Button";
-import { ModalActions } from "../../../../Store/reducers/ModalReducer";
-import { useAppDispatch } from "../../../../Store/hooks/reduxHooks";
-import { ModalInput } from "../../../../Input/ModalInput/ModalInput";
-import Paragraph from "../../../../../shared/ui/Paragraph/Paragraph";
 import { useForm } from "react-hook-form";
-import { CreateUserDto } from "../../../../User/model/CreateUserDto";
-import { AuthActions } from "../../../../Store/reducers/AuthReducer";
-import { useRegistration } from "../../../api/authService";
-import { useError } from "../../../../../shared/hooks/useError";
-import { ProfileActions } from "../../../../Store/reducers/ProfileReducer";
+import { useRegistration } from "@/entities/Auth/api/authService";
+import { useError } from "@/shared/hooks/useError";
+import { ModalActions } from "@/shared/Store/reducers/ModalReducer";
+import { useAppDispatch } from "@/shared/Store/hooks/reduxHooks";
+import { ModalInput } from "@/entities/Input/ui/ModalInput/ModalInput";
+import { CreateUserDto } from "@/entities/User/model/CreateUserDto";
+import { AuthActions } from "@/shared/Store/reducers/AuthReducer";
+import { ProfileActions } from "@/shared/Store/reducers/ProfileReducer";
+import Paragraph from "@/shared/ui/Paragraph/Paragraph";
+import Button from "@/shared/ui/Button/Button";
+import Heading from "@/shared/ui/Heading/Heading";
+import { CloseImg } from "@/shared/public/images";
+import "./RegistrationModal.scss";
 
 export const RegistrationModal = () => {
   const { register, handleSubmit } = useForm<CreateUserDto>();

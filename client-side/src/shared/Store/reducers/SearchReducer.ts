@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserModel } from "../../User/model/UserModel";
-import { LinkModel } from "../../Link/model/LinkModel";
+import { LinkModel } from "@/entities/Link/model/LinkModel";
 
 interface SearchState {
   search: string;
   webSite: string;
   links: LinkModel[];
   isLoading: boolean;
+  error: string;
 }
 
 const initialState: SearchState = {
@@ -14,6 +14,7 @@ const initialState: SearchState = {
   webSite: "",
   links: [],
   isLoading: false,
+  error: "",
 };
 
 const searchSlice = createSlice({
@@ -39,6 +40,9 @@ const searchSlice = createSlice({
     },
     setWebSite: (state: SearchState, action: PayloadAction<string>) => {
       state.webSite = action.payload;
+    },
+    setError: (state: SearchState, action: PayloadAction<string>) => {
+      state.error = action.payload;
     },
   },
 });

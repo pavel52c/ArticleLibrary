@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
-import { axiosBaseQuery } from "../../../shared/helpers/getBaseQuery";
+import { axiosBaseQuery } from "@/shared/helpers/getBaseQuery";
 import { LinkModel, WebSiteModel } from "../model/LinkModel";
-import { requestMethods } from "../../../shared/helpers/requestMethods";
+import { requestMethods } from "@/shared/helpers/requestMethods";
 
 export const LinkApi = createApi({
   reducerPath: "LinkApi",

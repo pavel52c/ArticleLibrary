@@ -1,12 +1,12 @@
-import { axiosBaseQuery } from "../../../shared/helpers/getBaseQuery";
-import { CreateUserDto } from "../../User/model/CreateUserDto";
+import { axiosBaseQuery } from "@/shared/helpers/getBaseQuery";
+import { CreateUserDto } from "@/entities/User/model/CreateUserDto";
 import {
   createApi,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/dist/query/react";
 import { AuthResponseModel } from "../model/AuthResponseModel";
-import { UserModel } from "../../User/model/UserModel";
-import { requestMethods } from "../../../shared/helpers/requestMethods";
+import { UserModel } from "@/entities/User/model/UserModel";
+import { requestMethods } from "@/shared/helpers/requestMethods";
 
 export const AuthApi = createApi({
   baseQuery: axiosBaseQuery({}),

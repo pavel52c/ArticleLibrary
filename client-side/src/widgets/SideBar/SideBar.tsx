@@ -1,19 +1,19 @@
-import React, { ReactNode } from "react";
-import "./SideBar.scss";
+import React from "react";
 import { useGetWebSites } from "../../entities/Link/api/LinkService";
 import { DropDownBlock } from "../../features/SideBar/DropDownBlock/DropDownBlock";
 import { mapWebSites } from "../../features/SideBar/helpers/mapWebSites";
-import { WebSiteModel } from "../../entities/Link/model/LinkModel";
-import { useAppDispatch } from "../../entities/Store/hooks/reduxHooks";
-import { SearchActions } from "../../entities/Store/reducers/SearchReducer";
-import { useSelector } from "react-redux";
-import { RootState } from "../../entities/Store/store";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../shared/Store/hooks/reduxHooks";
+import { SearchActions } from "../../shared/Store/reducers/SearchReducer";
 import { PagesBlock } from "../../features/SideBar/PagesBlock/PagesBlock";
+import "./SideBar.scss";
 
 export const SideBar: React.FC = () => {
   const { data: webSites = [] } = useGetWebSites();
   const dispatch = useAppDispatch();
-  const { webSite } = useSelector((state: RootState) => state.search);
+  const { webSite } = useAppSelector((state) => state.search);
 
   const dropDownProps = {
     items: mapWebSites(webSites),

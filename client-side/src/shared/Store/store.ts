@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { UserApi } from "../User/api/UserService";
+import { UserApi } from "../../entities/User/api/UserService";
 import { rootReducer } from "./rootReducer";
-import { ArticleApi } from "../Article/api/articleService";
-import { LinkApi } from "../Link/api/LinkService";
-import { AuthApi } from "../Auth/api/authService";
+import { ArticleApi } from "../../entities/Article/api/articleService";
+import { LinkApi } from "../../entities/Link/api/LinkService";
+import { AuthApi } from "../../entities/Auth/api/authService";
 
 export const middlewares = [
   UserApi.middleware,

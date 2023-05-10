@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from "react";
-import classNames from "classnames";
-import { useSelector } from "react-redux";
-import { LinkModel } from "../../entities/Link/model/LinkModel";
-import { LinkItem } from "../../entities/Link/ui/LinkItem/LinkItem";
 import { TailSpin } from "react-loader-spinner";
-import { MainInput } from "../../entities/Input/MainInput/MainInput";
-import { useAppDispatch } from "../../entities/Store/hooks/reduxHooks";
-import { RootState } from "../../entities/Store/store";
-import { SearchActions } from "../../entities/Store/reducers/SearchReducer";
-import LinkApiActions from "../../entities/Link/api/LinkApiActions";
-import { debounce } from "lodash";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "@/shared/Store/hooks/reduxHooks";
+import { LinkItem } from "@/entities/Link/ui/LinkItem/LinkItem";
+import { SearchActions } from "@/shared/Store/reducers";
+import LinkApiActions from "@/entities/Link/api/LinkApiActions";
+import { LinkModel } from "@/entities/Link/model/LinkModel";
+import { MainInput } from "@/entities/Input/ui/MainInput/MainInput";
+import Button from "@/shared/ui/Button/Button";
+import Paragraph from "@/shared/ui/Paragraph/Paragraph";
 import "./MainPage.scss";
-import Button from "../../shared/ui/Button/Button";
-import Paragraph from "../../shared/ui/Paragraph/Paragraph";
 
 export const MainPage = () => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     LinkApiActions.getLinksForMainPage(dispatch);
   }, []);
+
   const {
     links = [],
     isLoading,
     webSite,
     search,
-  } = useSelector((state: RootState) => state.search);
+  } = useAppSelector((state) => state.search);
+
   const [offset, setOffset] = useState(0);
 
   const onChange = (value: string) => {
@@ -66,21 +68,17 @@ export const MainPage = () => {
           </Paragraph>
         </Button>
       </div>
-      <ul
-        className={classNames("MainPage__list", {
-          "MainPage__list--parsed": !isLoading,
-        })}
-      >
-        {isLoading ? (
-          <TailSpin width="80" color="green" wrapperClass="MainPage__loader" />
-        ) : (
-          links.map((link: LinkModel) => (
+      {isLoading ? (
+        <TailSpin width="80" color="green" wrapperClass="MainPage__loader" />
+      ) : (
+        <ul className="MainPage__list">
+          {links.map((link: LinkModel) => (
             <li key={link.title}>
               <LinkItem {...link} />
             </li>
-          ))
-        )}
-      </ul>
+          ))}
+        </ul>
+      )}
       {!isLoading && (
         <Button
           variant="primary"

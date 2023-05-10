@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ArticleModel } from "../../Article/model/ArticleModel";
-import { ArticleTagModel } from "../../ArticleTag/model/ArticleTagModel";
+import { ArticleModel } from "../../../entities/Article/model/ArticleModel";
+import { ArticleTagModel } from "../../../entities/ArticleTag/model/ArticleTagModel";
 
 interface ProfileState {
   username: string;

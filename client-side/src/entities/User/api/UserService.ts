@@ -1,8 +1,8 @@
 import { UserModel } from "../model/UserModel";
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
-import { axiosBaseQuery } from "../../../shared/helpers/getBaseQuery";
+import { axiosBaseQuery } from "@/shared/helpers/getBaseQuery";
 import { CreateUserDto } from "../model/CreateUserDto";
-import { requestMethods } from "../../../shared/helpers/requestMethods";
+import { requestMethods } from "@/shared/helpers/requestMethods";
 
 export const UserApi = createApi({
   reducerPath: "UserAPI",

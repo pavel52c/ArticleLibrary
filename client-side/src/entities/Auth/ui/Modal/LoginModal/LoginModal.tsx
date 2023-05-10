@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Heading from "../../../../../shared/ui/Heading/Heading";
-import { CloseImg } from "../../../../../shared/public/images";
-import { useAppDispatch } from "../../../../Store/hooks/reduxHooks";
-import Button from "../../../../../shared/ui/Button/Button";
-import { ModalActions } from "../../../../Store/reducers/ModalReducer";
-import Paragraph from "../../../../../shared/ui/Paragraph/Paragraph";
-import { ModalInput } from "../../../../Input/ModalInput/ModalInput";
-import { CreateUserDto } from "../../../../User/model/CreateUserDto";
-import { useLogin } from "../../../api/authService";
-import { useError } from "../../../../../shared/hooks/useError";
-import { AuthActions } from "../../../../Store/reducers/AuthReducer";
+import { useLogin } from "@/entities/Auth/api/authService";
+import { useError } from "@/shared/hooks/useError";
+import { ModalActions } from "@/shared/Store/reducers/ModalReducer";
+import { useAppDispatch } from "@/shared/Store/hooks/reduxHooks";
+import { ModalInput } from "@/entities/Input/ui/ModalInput/ModalInput";
+import { CreateUserDto } from "@/entities/User/model/CreateUserDto";
+import { AuthActions } from "@/shared/Store/reducers/AuthReducer";
+import { ProfileActions } from "@/shared/Store/reducers/ProfileReducer";
+import Paragraph from "@/shared/ui/Paragraph/Paragraph";
+import Button from "@/shared/ui/Button/Button";
+import Heading from "@/shared/ui/Heading/Heading";
+import { CloseImg } from "@/shared/public/images";
 import "./LoginModal.scss";
-import { ProfileActions } from "../../../../Store/reducers/ProfileReducer";
 
 export const LoginModal = () => {
   const { register, handleSubmit } = useForm<CreateUserDto>();

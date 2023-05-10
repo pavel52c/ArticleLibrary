@@ -8,7 +8,11 @@
         "lib": [ "es2015", "dom" ],
         "outDir": "./dist/",
         "sourceMap": true,
-        "declaration": true
+        "declaration": true,
+        "baseUrl": "src",
+        "paths": {
+            "@/*": ["*"]
+        }
     },
     "include": ["src",
         "src/custom.d.ts"
