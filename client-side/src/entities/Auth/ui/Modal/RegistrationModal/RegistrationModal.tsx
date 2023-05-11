@@ -6,8 +6,6 @@ import { ModalActions } from "@/shared/Store/reducers/ModalReducer";
 import { useAppDispatch } from "@/shared/Store/hooks/reduxHooks";
 import { ModalInput } from "@/entities/Input/ui/ModalInput/ModalInput";
 import { CreateUserDto } from "@/entities/User/model/CreateUserDto";
-import { AuthActions } from "@/shared/Store/reducers/AuthReducer";
-import { ProfileActions } from "@/shared/Store/reducers/ProfileReducer";
 import Paragraph from "@/shared/ui/Paragraph/Paragraph";
 import Button from "@/shared/ui/Button/Button";
 import Heading from "@/shared/ui/Heading/Heading";
@@ -22,13 +20,8 @@ export const RegistrationModal = () => {
 
   const closeModal = () => dispatch(ModalActions.closeModal());
 
-  const onSubmit = async (formValues: CreateUserDto) => {
-    const loginRes = await loginFn(formValues);
-    if ("data" in loginRes) {
-      dispatch(ProfileActions.setUsername(loginRes.data.username));
-      dispatch(AuthActions.setLogin());
-    }
-  };
+  const onSubmit = async (formValues: CreateUserDto) =>
+    await loginFn(formValues);
 
   useEffect(() => {
     if (isSuccess) closeModal();

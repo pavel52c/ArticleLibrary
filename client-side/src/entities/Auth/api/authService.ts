@@ -7,7 +7,7 @@ import {
 import { AuthResponseModel } from "../model/AuthResponseModel";
 import { UserModel } from "@/entities/User/model/UserModel";
 import { requestMethods } from "@/shared/helpers/requestMethods";
-import { ProfileActions } from "@/shared/Store/reducers";
+import { AuthActions, ProfileActions } from "@/shared/Store/reducers";
 
 export const AuthApi = createApi({
   baseQuery: axiosBaseQuery({}),
@@ -34,6 +34,7 @@ export const AuthApi = createApi({
           },
         });
         _queryApi.dispatch(ProfileActions.setData(result.data as UserModel));
+        _queryApi.dispatch(AuthActions.setLogin());
         return result.data
           ? { data: result.data as UserModel }
           : { error: result.error as FetchBaseQueryError };
@@ -59,6 +60,7 @@ export const AuthApi = createApi({
           },
         });
         _queryApi.dispatch(ProfileActions.setData(result.data as UserModel));
+        _queryApi.dispatch(AuthActions.setLogin());
         return result.data
           ? { data: result.data as UserModel }
           : { error: result.error as FetchBaseQueryError };
