@@ -1,0 +1,9 @@
+.MainPageSearchBlockProps {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+
+  &__btn {
+    width: 110px;
+  }
+}
