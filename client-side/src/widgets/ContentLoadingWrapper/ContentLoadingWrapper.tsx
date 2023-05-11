@@ -5,14 +5,14 @@ import Paragraph from "@/shared/ui/Paragraph/Paragraph";
 
 interface ContentLoadingWrapperProps {
   children: React.ReactNode;
-  error: string;
-  isLoading: boolean;
+  error?: string;
+  isLoading?: boolean;
 }
 
 export const ContentLoadingWrapper: React.FC<ContentLoadingWrapperProps> = (
   props
 ) => {
-  const { error, isLoading, children } = props;
+  const { error = "", isLoading = false, children } = props;
   switch (true) {
     case !!error:
       return (

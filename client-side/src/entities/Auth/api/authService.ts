@@ -7,6 +7,7 @@ import {
 import { AuthResponseModel } from "../model/AuthResponseModel";
 import { UserModel } from "@/entities/User/model/UserModel";
 import { requestMethods } from "@/shared/helpers/requestMethods";
+import { ProfileActions } from "@/shared/Store/reducers";
 
 export const AuthApi = createApi({
   baseQuery: axiosBaseQuery({}),
@@ -28,7 +29,11 @@ export const AuthApi = createApi({
         const result = await fetchWithBQ({
           url: "/profile",
           method: requestMethods.GET,
+          headers: {
+            authorization: `Bearer ${authRes.accessToken}`,
+          },
         });
+        _queryApi.dispatch(ProfileActions.setData(result.data as UserModel));
         return result.data
           ? { data: result.data as UserModel }
           : { error: result.error as FetchBaseQueryError };
@@ -36,20 +41,24 @@ export const AuthApi = createApi({
     }),
     registration: build.mutation<UserModel, CreateUserDto>({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
-        const loginRes = await fetchWithBQ({
+        const registrationRes = await fetchWithBQ({
           url: "/registration",
           method: requestMethods.POST,
           data: _arg,
         });
-        if (loginRes.error)
-          return { error: loginRes.error as FetchBaseQueryError };
-        const authRes = loginRes.data as AuthResponseModel;
+        if (registrationRes.error)
+          return { error: registrationRes.error as FetchBaseQueryError };
+        const authRes = registrationRes.data as AuthResponseModel;
         localStorage.setItem("accessToken", authRes.accessToken);
         localStorage.setItem("refreshToken", authRes.refreshToken);
         const result = await fetchWithBQ({
           url: "/profile",
           method: requestMethods.GET,
+          headers: {
+            authorization: `Bearer ${authRes.accessToken}`,
+          },
         });
+        _queryApi.dispatch(ProfileActions.setData(result.data as UserModel));
         return result.data
           ? { data: result.data as UserModel }
           : { error: result.error as FetchBaseQueryError };

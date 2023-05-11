@@ -1,12 +1,14 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { ArticleEntity } from '../entities/article.entity';
 import { CreateArticleDto } from '../dto/create-article.dto';
 import { AbstractService } from '../../abstract/services/abstract.service';
 import { ReferenceService } from '../../reference/services/reference.service';
 import { HTTPError } from '../../../helpers/error';
 import { ArticleTagService } from '../../articleTag/services/articleTag.service';
+import { AuthService } from '../../auth/services/auth.service';
+import { UsersService } from '../../user/services/users.service';
 
 @Injectable()
 export class ArticleService {
@@ -16,6 +18,8 @@ export class ArticleService {
     private readonly abstractService: AbstractService,
     private readonly referenceService: ReferenceService,
     private readonly articleTagService: ArticleTagService,
+    private readonly authService: AuthService,
+    private readonly userService: UsersService,
   ) {}
 
   async create(articleDto: CreateArticleDto): Promise<ArticleEntity> {
@@ -77,6 +81,27 @@ export class ArticleService {
       const Tags = await this.articleTagService.findAllById(tags);
       return this.updateArticle(articleId, {
         tags: [...article.tags, ...Tags],
+      });
+    }
+  }
+
+  async addArticle(articleId: number, userToken: string) {
+    try {
+      const user = await this.authService.getUserByToken(userToken);
+      const article = await this.findOne(articleId);
+      if (user && article) {
+        await this.userService.updateUser(user, {
+          ...user,
+          articles: [...user.articles, article],
+        });
+
+        await this.updateArticle(articleId, {
+          users: [...article.users, user],
+        });
+      }
+    } catch (e) {
+      throw new UnauthorizedException({
+        message: 'Пользователь не авторизован',
       });
     }
   }

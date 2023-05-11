@@ -1,9 +1,11 @@
 import React from "react";
-import { LoginBtn } from "../../features/Header/LoginBtn/LoginBtn";
+import { LoginBtn } from "@/features/Header/LoginBtn/LoginBtn";
+import { LogoImg } from "@/shared/public/images";
 import "./Header.scss";
 
 export const Header = () => (
   <header className="Header">
-    Logo <LoginBtn />
+    <LogoImg />
+    <LoginBtn />
   </header>
 );

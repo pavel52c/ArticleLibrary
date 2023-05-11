@@ -21,14 +21,10 @@ export const SideBar: React.FC = () => {
     selectedItem: webSite,
   };
 
-  const PagesProps = {
-    links: ["Keks", "Shmels"],
-  };
-
   return (
     <div className="SideBar">
       <DropDownBlock {...dropDownProps} />
-      <PagesBlock {...PagesProps} />
+      <PagesBlock />
     </div>
   );
 };

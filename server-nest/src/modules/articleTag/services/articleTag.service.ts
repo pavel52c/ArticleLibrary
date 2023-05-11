@@ -36,6 +36,10 @@ export class ArticleTagService {
     return await this.articleTagRepository.find({ where: { tag } });
   }
 
+  async findOne(tagId: number) {
+    return await this.articleTagRepository.find({ where: { id: tagId } });
+  }
+
   async findAllById(tags: number[]) {
     const arr = [];
     tags.forEach((id) => {
@@ -48,5 +52,12 @@ export class ArticleTagService {
     return await this.articleTagRepository.find({
       relations: { users: true, articles: true },
     });
+  }
+
+  async updateTag(tagId: number, tagData: Partial<ArticleTagEntity>) {
+    const tag = await this.findOne(tagId);
+    if (tag) {
+      return await this.articleTagRepository.save({ ...tag, ...tagData });
+    }
   }
 }

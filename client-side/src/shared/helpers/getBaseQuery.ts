@@ -14,6 +14,7 @@ interface BaseQueryFnProps {
   method: AxiosRequestConfig["method"];
   data?: AxiosRequestConfig["data"];
   params?: AxiosRequestConfig["params"];
+  headers?: AxiosRequestConfig["headers"];
 }
 
 const jwtToken = localStorage.getItem("accessToken");

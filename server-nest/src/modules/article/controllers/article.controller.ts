@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { ArticleService } from '../servicies/article.service';
@@ -13,6 +14,7 @@ import { CreateArticleDto } from '../dto/create-article.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { parseArticle } from '../policies/parseArticle';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { getTokenFromHeaders } from '../../../helpers/getTokenFromHeaders';
 
 @Controller('articles')
 export class ArticleController {
@@ -60,5 +62,16 @@ export class ArticleController {
   @Post('addTags')
   async addTags(@Body() body: { articleId: number; tags: number[] }) {
     return this.articleService.addTagsToArticle(body.articleId, body.tags);
+  }
+
+  @ApiOperation({ summary: 'Сохранить статью у пользователя' })
+  @ApiResponse({ status: 200 })
+  @UseGuards(JwtAuthGuard)
+  @Post('addArticle')
+  async addArticle(@Body() body: { articleId: number }, @Req() request) {
+    return this.articleService.addArticle(
+      body.articleId,
+      getTokenFromHeaders(request.authorization),
+    );
   }
 }

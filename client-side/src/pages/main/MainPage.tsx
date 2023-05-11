@@ -7,16 +7,18 @@ import { LinkItem } from "@/entities/Link/ui/LinkItem/LinkItem";
 import LinkApiActions from "@/entities/Link/api/LinkApiActions";
 import { LinkModel } from "@/entities/Link/model/LinkModel";
 import { ContentLoadingWrapper } from "@/widgets/ContentLoadingWrapper/ContentLoadingWrapper";
-import { MainPageSearchBlock } from "@/widgets/MainPageSearchBlock/ui/MainPageSearchBlock";
+import { SearchBlock } from "@/widgets/SearchBlock/ui/SearchBlock";
 import { ShowMoreBtn } from "@/features/ShowMoreBtn/ui/ShowMoreBtn";
 import "./MainPage.scss";
+import { SearchActions } from "@/shared/Store/reducers";
 
 export const MainPage = () => {
-  const dispatch = useAppDispatch();
-
   useEffect(() => {
     LinkApiActions.getLinksForMainPage(dispatch);
   }, []);
+
+  const [offset, setOffset] = useState(0);
+  const dispatch = useAppDispatch();
 
   const {
     links = [],
@@ -25,8 +27,6 @@ export const MainPage = () => {
     webSite,
     search,
   } = useAppSelector((state) => state.search);
-
-  const [offset, setOffset] = useState(0);
 
   const onSubmit = () =>
     LinkApiActions.getLinksFromInput(
@@ -39,12 +39,17 @@ export const MainPage = () => {
       offset !== 0
     );
 
+  const onChange = (value: string) => {
+    dispatch(SearchActions.setSearch(value));
+  };
+
   useEffect(() => {
     if (offset !== 0) onSubmit();
   }, [offset]);
 
   const mainPageSearchBlockProps = {
     onSubmit: useCallback(onSubmit, [search]),
+    onChange,
   };
 
   const showMoreBtnProps = {
@@ -54,7 +59,7 @@ export const MainPage = () => {
 
   return (
     <div className="MainPage">
-      <MainPageSearchBlock {...mainPageSearchBlockProps} />
+      <SearchBlock {...mainPageSearchBlockProps} />
       <ContentLoadingWrapper error={error} isLoading={isLoading}>
         <ul className="MainPage__list">
           {links.map((link: LinkModel) => (

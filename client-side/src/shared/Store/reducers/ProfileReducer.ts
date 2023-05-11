@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ArticleModel } from "../../../entities/Article/model/ArticleModel";
-import { ArticleTagModel } from "../../../entities/ArticleTag/model/ArticleTagModel";
+import { ArticleModel } from "@/entities/Article/model/ArticleModel";
+import { ArticleTagModel } from "@/entities/ArticleTag/model/ArticleTagModel";
+import { UserModel } from "@/entities/User/model/UserModel";
 
 interface ProfileState {
   username: string;
@@ -11,7 +12,13 @@ interface ProfileState {
 
 const initialState: ProfileState = {
   username: "",
-  articles: [],
+  articles: [
+    {
+      title: "kek",
+      abstracts: [],
+      references: [],
+    },
+  ],
   favoriteTags: [],
   banned: false,
 };
@@ -20,6 +27,11 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   reducers: {
+    setData: (state: ProfileState, action: PayloadAction<UserModel>) => {
+      state.username = action.payload.username;
+      state.articles = action.payload.articles;
+      state.favoriteTags = action.payload.favoriteTags;
+    },
     setArticles: (
       state: ProfileState,
       action: PayloadAction<ArticleModel[]>

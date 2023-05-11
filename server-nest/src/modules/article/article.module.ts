@@ -7,6 +7,7 @@ import { ReferenceModule } from '../reference/reference.module';
 import { AbstractModule } from '../abstract/abstract.module';
 import { AuthModule } from '../auth/auth.module';
 import { ArticleTagModule } from '../articleTag/articleTag.module';
+import { UsersModule } from '../user/users.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ArticleTagModule } from '../articleTag/articleTag.module';
     AbstractModule,
     AuthModule,
     ArticleTagModule,
+    UsersModule,
   ],
   providers: [ArticleService],
   controllers: [ArticleController],

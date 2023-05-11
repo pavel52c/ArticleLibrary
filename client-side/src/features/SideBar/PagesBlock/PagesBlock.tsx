@@ -22,9 +22,9 @@ const pages = [
 export const PagesBlock: React.FC<PagesBlockProps> = () => (
   <ul className="PagesBlock">
     {pages.map(({ url, Image, description }) => (
-      <li key={url} className="PagesBlock__item">
-        <Image />
-        <a href={url}>
+      <li key={url}>
+        <a href={url} className="PagesBlock__item">
+          <Image />
           <Paragraph size="xl" mode="semibold">
             {description}
           </Paragraph>
