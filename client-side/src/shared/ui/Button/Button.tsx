@@ -1,6 +1,7 @@
 import * as React from "react";
 import classNames from "classnames";
 import { capitalize } from "lodash";
+import { MutableRefObject } from "react";
 
 const ButtonVariantTypes = ["custom", "primary", "secondary"] as const;
 const ButtonHTMLTypes = ["submit", "button", "reset"] as const;

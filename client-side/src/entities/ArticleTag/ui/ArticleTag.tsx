@@ -1,13 +1,12 @@
 import React from "react";
-import "./ArticleTag.scss";
+import { ArticleTagModel } from "@/entities/ArticleTag/model/ArticleTagModel";
 import Paragraph from "@/shared/ui/Paragraph/Paragraph";
+import "./ArticleTag.scss";
 
-interface ArticleTagProps {
-  children: React.ReactNode;
-}
+type ArticleTagProps = ArticleTagModel;
 
-export const ArticleTag: React.FC<ArticleTagProps> = ({ children }) => (
+export const ArticleTag: React.FC<ArticleTagProps> = ({ tag }) => (
   <Paragraph size="l" mode="medium" className="ArticleTag">
-    {children}
+    {tag}
   </Paragraph>
 );

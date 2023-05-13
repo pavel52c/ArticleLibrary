@@ -22,13 +22,21 @@ export class ArticleService {
     private readonly userService: UsersService,
   ) {}
 
-  async create(articleDto: CreateArticleDto): Promise<ArticleEntity> {
-    const { abstracts, references } = articleDto;
-    const article = await this.articleRepository.save(articleDto);
+  async create(
+    articleDto: CreateArticleDto,
+    token: string,
+  ): Promise<ArticleEntity> {
+    const { abstracts, references, tags } = articleDto;
+    const user = await this.authService.getUserByToken(token);
+    const article = await this.articleRepository.save({
+      ...articleDto,
+      users: [user],
+    });
 
     await Promise.all([
       this.abstractService.createFromArray(abstracts, article),
       this.referenceService.createFromArray(references, article),
+      this.articleTagService.createFromArray(tags, article, token),
     ]);
 
     return article;
@@ -77,8 +85,8 @@ export class ArticleService {
 
   async addTagsToArticle(articleId: number, tags: number[]) {
     const article = await this.findOne(articleId);
-    if (article) {
-      const Tags = await this.articleTagService.findAllById(tags);
+    const Tags = await this.articleTagService.findAllById(tags);
+    if (article && Tags) {
       return this.updateArticle(articleId, {
         tags: [...article.tags, ...Tags],
       });

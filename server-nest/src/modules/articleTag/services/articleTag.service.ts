@@ -5,6 +5,10 @@ import { Repository } from 'typeorm';
 import { UsersService } from '../../user/services/users.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { HTTPError } from '../../../helpers/error';
+import { CreateArticleDto } from '../../article/dto/create-article.dto';
+import { ArticleEntity } from '../../article/entities/article.entity';
+import { CreateTagDto } from '../dto/createTagDto';
+import { UserEntity } from '../../user/entities/user.entity';
 
 @Injectable()
 export class ArticleTagService {
@@ -59,5 +63,22 @@ export class ArticleTagService {
     if (tag) {
       return await this.articleTagRepository.save({ ...tag, ...tagData });
     }
+  }
+
+  async createFromArray(
+    tags: CreateTagDto[],
+    article: ArticleEntity,
+    userToken: string,
+  ) {
+    const Tags = tags.map(async (tag) => {
+      const candidate = await this.findTag(tag.tag);
+      if (!candidate)
+        return await this.articleTagRepository.save({
+          tag: tag.tag,
+          articles: [article],
+        });
+      return candidate;
+    });
+    await this.userService.addFavoriteTags(Tags, userToken);
   }
 }

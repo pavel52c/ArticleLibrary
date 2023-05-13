@@ -7,6 +7,7 @@ import {
   Post,
   Req,
   UseGuards,
+  Headers,
 } from '@nestjs/common';
 import { ArticleService } from '../servicies/article.service';
 import { ArticleEntity } from '../entities/article.entity';
@@ -24,8 +25,8 @@ export class ArticleController {
   @ApiResponse({ status: 200, type: ArticleEntity })
   @UseGuards(JwtAuthGuard)
   @Post('create')
-  async create(@Body() articleDto: CreateArticleDto) {
-    return this.articleService.create(articleDto);
+  async create(@Body() articleDto: CreateArticleDto, @Headers() headers) {
+    return this.articleService.create(articleDto, getTokenFromHeaders(headers));
   }
 
   @ApiOperation({ summary: 'Получить статью по id' })
