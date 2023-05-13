@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserModel } from "../../../entities/User/model/UserModel";
+import { UserModel } from "@/entities/User/model/UserModel";
 
 interface UserState {
   users: UserModel[];

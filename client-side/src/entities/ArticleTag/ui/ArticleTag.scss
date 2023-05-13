@@ -1,0 +1,9 @@
+@import '../../../shared/styles/abstracts/variables';
+
+.ArticleTag {
+  background: $secondary90;
+  border: 1px solid #3F4759;
+  border-radius: 8px;
+  padding: 8px 12px;
+  width: fit-content;
+}

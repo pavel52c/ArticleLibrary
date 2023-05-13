@@ -11,6 +11,7 @@ import { SearchBlock } from "@/widgets/SearchBlock/ui/SearchBlock";
 import { ShowMoreBtn } from "@/features/ShowMoreBtn/ui/ShowMoreBtn";
 import "./MainPage.scss";
 import { SearchActions } from "@/shared/Store/reducers";
+import {ArticleTag} from "@/entities/ArticleTag/ui/ArticleTag";
 
 export const MainPage = () => {
   useEffect(() => {
@@ -65,6 +66,7 @@ export const MainPage = () => {
           {links.map((link: LinkModel) => (
             <li key={link.title}>
               <LinkItem {...link} />
+              <ArticleTag>Химия</ArticleTag>
             </li>
           ))}
         </ul>

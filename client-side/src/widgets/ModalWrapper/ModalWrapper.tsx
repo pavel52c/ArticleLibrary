@@ -1,8 +1,8 @@
 import React from "react";
 import { useAppSelector } from "@/shared/Store/hooks/reduxHooks";
 import { Modal } from "@/shared/ui";
-import { RegistrationModal } from "./RegistrationModal/RegistrationModal";
-import { LoginModal } from "./LoginModal/LoginModal";
+import { RegistrationModal } from "../../features/Modal/RegistrationModal/RegistrationModal";
+import { LoginModal } from "../../features/Modal/LoginModal/LoginModal";
 
 export const ModalWrapper = () => {
   const modal = useAppSelector((state) => state.modal);

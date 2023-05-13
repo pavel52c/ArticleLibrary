@@ -1,11 +1,9 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import { BrowserRouter, Outlet } from "react-router-dom";
-import { Container, Header, MainPageWrapper, SideBar } from "@/features";
-import { ModalWrapper } from "@/entities/Auth/ui/Modal/ModalWrapper";
-import { MainPage } from "@/pages/main/MainPage";
-import { FavoriteArticlesPage } from "@/pages/favoriteArticles/FavoriteArticlesPage";
-import { ArticlePage } from "@/pages/article/ArticlePage";
+import { Container, Header, MainPageWrapper } from "@/features";
+import { ModalWrapper, SideBar } from "@/widgets";
+import { ArticlePage, FavoriteArticlesPage, MainPage } from "@/pages";
 
 const Layout = () => (
   <Container>

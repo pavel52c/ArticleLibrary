@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { UserApi } from "../../entities/User/api/UserService";
+import { UserApi } from "@/entities/User/api/UserService";
 import { rootReducer } from "./rootReducer";
-import { ArticleApi } from "../../entities/Article/api/articleService";
-import { LinkApi } from "../../entities/Link/api/LinkService";
-import { AuthApi } from "../../entities/Auth/api/authService";
+import { ArticleApi } from "@/entities/Article/api/articleService";
+import { LinkApi } from "@/entities/Link/api/LinkService";
+import { AuthApi } from "@/entities/Auth/api/authService";
 
-export const middlewares = [
+const middlewares = [
   UserApi.middleware,
   ArticleApi.middleware,
   LinkApi.middleware,

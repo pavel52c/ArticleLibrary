@@ -1,4 +1,4 @@
-import { UserModel } from "../../User/model/UserModel";
+import { UserModel } from "@/entities/User/model/UserModel";
 
 export interface AuthResponseModel {
   accessToken: string;

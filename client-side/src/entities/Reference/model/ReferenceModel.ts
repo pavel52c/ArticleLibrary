@@ -1,4 +1,4 @@
-import { LinkModel } from "../../Link/model/LinkModel";
+import { LinkModel } from "@/entities/Link/model/LinkModel";
 
 export interface ReferenceModel {
   title: string;
