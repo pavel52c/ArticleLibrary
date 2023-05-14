@@ -8,6 +8,7 @@ import {
   UseGuards,
   Headers,
   Request,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { UserEntity } from '../entities/user.entity';
@@ -55,7 +56,7 @@ export class UsersController {
   }
 
   @Post('addTags')
-  async addTags(@Headers() headers, @Body() body: { tags: number[] }) {
-    return await this.userService.addFavoriteTags(headers, body.tags);
+  async addTags(@Req() request, @Body() body: { tags: number[] }) {
+    return await this.userService.addFavoriteTags(request, body.tags);
   }
 }

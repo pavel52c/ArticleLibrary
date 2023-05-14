@@ -7,6 +7,7 @@ import { CreateReferenceDto } from '../dto/create-reference.dto';
 import { HTTPError } from '../../../helpers/error';
 import { isEmpty } from '@nestjs/common/utils/shared.utils';
 import { ArticleEntity } from '../../article/entities/article.entity';
+import { AbstractEntity } from '../../abstract/entities/abstract.entity';
 
 @Injectable()
 export class ReferenceService {
@@ -20,7 +21,7 @@ export class ReferenceService {
     const { links } = referenceDto;
     const newReference = await this.referenceRepository.save(referenceDto);
 
-    links.forEach(
+    const savedLinks = links.map(
       async (link) =>
         await this.linkService.create({
           ...link,
@@ -33,10 +34,13 @@ export class ReferenceService {
   async createFromArray(
     referencesDto: CreateReferenceDto[],
     article: ArticleEntity,
-  ): Promise<void> {
-    referencesDto.forEach((referenceDto) =>
-      this.create({ ...referenceDto, article }),
-    );
+  ): Promise<ReferenceEntity[]> {
+    const resultReferences: ReferenceEntity[] = [];
+    for (const reference of referencesDto) {
+      const savedAbstract = await this.create({ ...reference, article });
+      resultReferences.push(savedAbstract);
+    }
+    return resultReferences;
   }
 
   async findAll(): Promise<ReferenceEntity[]> {

@@ -3,6 +3,8 @@ import { MainPageImg } from "@/shared/public/images";
 import { FavoriteArticlesImg } from "@/shared/public/images";
 import Paragraph from "@/shared/ui/Paragraph/Paragraph";
 import "./PagesBlock.scss";
+import classNames from "classnames";
+import { useLocation } from "react-router";
 
 interface PagesBlockProps {}
 
@@ -19,17 +21,26 @@ const pages = [
   },
 ];
 
-export const PagesBlock: React.FC<PagesBlockProps> = () => (
-  <ul className="PagesBlock">
-    {pages.map(({ url, Image, description }) => (
-      <li key={url}>
-        <a href={url} className="PagesBlock__item">
-          <Image />
-          <Paragraph size="xl" mode="semibold">
-            {description}
-          </Paragraph>
-        </a>
-      </li>
-    ))}
-  </ul>
-);
+export const PagesBlock: React.FC<PagesBlockProps> = () => {
+  const { pathname } = useLocation();
+
+  return (
+    <ul className="PagesBlock">
+      {pages.map(({ url, Image, description }) => (
+        <li key={url}>
+          <a
+            href={url}
+            className={classNames("PagesBlock__item", {
+              "PagesBlock__item--active": pathname === url,
+            })}
+          >
+            <Image />
+            <Paragraph size="xl" mode="semibold">
+              {description}
+            </Paragraph>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+};

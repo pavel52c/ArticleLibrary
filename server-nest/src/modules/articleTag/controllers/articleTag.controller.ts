@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Headers, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request } from '@nestjs/common';
 import { ArticleTagService } from '../services/articleTag.service';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ArticleTagEntity } from '../entities/articleTag.entity';
@@ -18,7 +18,7 @@ export class ArticleTagController {
   @ApiOperation({ summary: 'Создание тэга для статьи' })
   @ApiResponse({ status: 200, type: ArticleTagEntity })
   @Post('create')
-  async create(@Body() createTagDto: CreateTagDto, @Headers() headers) {
-    return this.articleTagService.create(createTagDto, headers);
+  async create(@Body() createTagDto: CreateTagDto, @Request() req) {
+    return this.articleTagService.create(createTagDto, req);
   }
 }

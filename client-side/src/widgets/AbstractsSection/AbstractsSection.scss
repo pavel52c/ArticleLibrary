@@ -1,0 +1,11 @@
+.AbstractsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}

@@ -22,24 +22,44 @@ export class ArticleService {
     private readonly userService: UsersService,
   ) {}
 
-  async create(
-    articleDto: CreateArticleDto,
-    token: string,
-  ): Promise<ArticleEntity> {
-    const { abstracts, references, tags } = articleDto;
-    const user = await this.authService.getUserByToken(token);
+  async create(articleDto: CreateArticleDto, request: any): Promise<void> {
+    const { abstracts, references, tags = [] } = articleDto;
+    const user = await this.authService.getUserByToken(request);
+
     const article = await this.articleRepository.save({
-      ...articleDto,
-      users: [user],
+      title: articleDto.title,
+      originLink: articleDto.originLink,
+      users: [],
+      abstracts: [],
+      references: [],
+      tags: [],
+    });
+    const updatedUser = await this.userService.updateUser(user, {
+      articles: [...user.articles, article],
     });
 
-    await Promise.all([
-      this.abstractService.createFromArray(abstracts, article),
-      this.referenceService.createFromArray(references, article),
-      this.articleTagService.createFromArray(tags, article, token),
-    ]);
+    article.users = [updatedUser];
 
-    return article;
+    const [savedAbstracts = [], savedReferences = [], savedTags = []] =
+      await Promise.all([
+        this.abstractService.createFromArray(abstracts, article),
+        this.referenceService.createFromArray(references, article),
+        this.articleTagService.createFromArray(tags, article, request),
+      ]);
+
+    savedTags.forEach((tag) =>
+      this.articleTagService.updateTag(tag.id, {
+        ...tag,
+        articles: [...tag.articles, article],
+      }),
+    );
+
+    await this.updateArticle(article.id, {
+      ...article,
+      abstracts: savedAbstracts,
+      references: savedReferences,
+      tags: savedTags,
+    });
   }
 
   async findAll(): Promise<ArticleEntity[]> {
@@ -51,7 +71,7 @@ export class ArticleService {
   async findOne(id: number): Promise<ArticleEntity> {
     return await this.articleRepository.findOne({
       where: { id: id },
-      relations: { abstracts: true, references: true },
+      relations: { abstracts: true, references: true, users: true, tags: true },
     });
   }
 
@@ -77,7 +97,7 @@ export class ArticleService {
   }
 
   async updateArticle(articleId: number, articleData: Partial<ArticleEntity>) {
-    const article = this.findOne(articleId);
+    const article = await this.findOne(articleId);
     if (article)
       return await this.articleRepository.save({ ...article, ...articleData });
     else throw HTTPError('Такой статьи не существует', HttpStatus.BAD_REQUEST);
@@ -93,19 +113,21 @@ export class ArticleService {
     }
   }
 
-  async addArticle(articleId: number, userToken: string) {
+  async addArticle(articleId: number, request: any) {
     try {
-      const user = await this.authService.getUserByToken(userToken);
+      const user = await this.authService.getUserByToken(request);
       const article = await this.findOne(articleId);
-      if (user && article) {
-        await this.userService.updateUser(user, {
-          ...user,
-          articles: [...user.articles, article],
-        });
+      if (user) {
+        if (article) {
+          await this.userService.updateUser(user, {
+            ...user,
+            articles: [...user.articles, article],
+          });
 
-        await this.updateArticle(articleId, {
-          users: [...article.users, user],
-        });
+          await this.updateArticle(articleId, {
+            users: [...article.users, user],
+          });
+        }
       }
     } catch (e) {
       throw new UnauthorizedException({

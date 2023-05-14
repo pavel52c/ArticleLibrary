@@ -6,10 +6,7 @@ import { isEmpty } from '@nestjs/common/utils/shared.utils';
 import { HTTPError } from '../../../helpers/error';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { nanoid } from 'nanoid';
-import { ArticleTagService } from '../../articleTag/services/articleTag.service';
 import { AuthService } from '../../auth/services/auth.service';
-import { ArticleTagEntity } from '../../articleTag/entities/articleTag.entity';
-import { ArticleEntity } from '../../article/entities/article.entity';
 
 const selectedFieldsForResponse = {
   username: true,
@@ -91,8 +88,8 @@ export class UsersService {
     return await this.userRepository.save({ ...User, ...userData });
   }
 
-  async addFavoriteTags(headers, tags) {
-    const user = await this.authService.getUserByToken(headers);
+  async addFavoriteTags(request, tags) {
+    const user = await this.authService.getUserByToken(request);
     return await this.updateUser(user, {
       favoriteTags: [...user.favoriteTags, ...tags],
     });

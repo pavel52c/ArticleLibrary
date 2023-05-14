@@ -7,7 +7,6 @@ import {
   Post,
   Req,
   UseGuards,
-  Headers,
 } from '@nestjs/common';
 import { ArticleService } from '../servicies/article.service';
 import { ArticleEntity } from '../entities/article.entity';
@@ -15,7 +14,6 @@ import { CreateArticleDto } from '../dto/create-article.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { parseArticle } from '../policies/parseArticle';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
-import { getTokenFromHeaders } from '../../../helpers/getTokenFromHeaders';
 
 @Controller('articles')
 export class ArticleController {
@@ -25,8 +23,8 @@ export class ArticleController {
   @ApiResponse({ status: 200, type: ArticleEntity })
   @UseGuards(JwtAuthGuard)
   @Post('create')
-  async create(@Body() articleDto: CreateArticleDto, @Headers() headers) {
-    return this.articleService.create(articleDto, getTokenFromHeaders(headers));
+  async create(@Body() articleDto: CreateArticleDto, @Req() request) {
+    return this.articleService.create(articleDto, request);
   }
 
   @ApiOperation({ summary: 'Получить статью по id' })
@@ -70,9 +68,6 @@ export class ArticleController {
   @UseGuards(JwtAuthGuard)
   @Post('addArticle')
   async addArticle(@Body() body: { articleId: number }, @Req() request) {
-    return this.articleService.addArticle(
-      body.articleId,
-      getTokenFromHeaders(request.authorization),
-    );
+    return this.articleService.addArticle(body.articleId, request);
   }
 }

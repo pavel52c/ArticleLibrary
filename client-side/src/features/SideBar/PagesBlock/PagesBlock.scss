@@ -8,5 +8,9 @@
     align-items: center;
     padding: 12px;
     width: fit-content;
+
+    &--active {
+      text-decoration: #062e9d underline;
+    }
   }
 }

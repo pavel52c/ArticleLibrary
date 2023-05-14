@@ -5,10 +5,8 @@ import { Repository } from 'typeorm';
 import { UsersService } from '../../user/services/users.service';
 import { AuthService } from '../../auth/services/auth.service';
 import { HTTPError } from '../../../helpers/error';
-import { CreateArticleDto } from '../../article/dto/create-article.dto';
 import { ArticleEntity } from '../../article/entities/article.entity';
 import { CreateTagDto } from '../dto/createTagDto';
-import { UserEntity } from '../../user/entities/user.entity';
 
 @Injectable()
 export class ArticleTagService {
@@ -21,9 +19,8 @@ export class ArticleTagService {
     private readonly userService: UsersService,
   ) {}
 
-  async create(createTagDto, headers) {
-    const token = headers.authorization;
-    const user = await this.authService.getUserByToken(token);
+  async create(createTagDto, req): Promise<ArticleTagEntity> {
+    const user = await this.authService.getUserByToken(req);
     if (await this.findTag(createTagDto.tag))
       throw HTTPError('Такой тэг уже существует', HttpStatus.BAD_REQUEST);
     const tag = await this.articleTagRepository.save({
@@ -37,7 +34,7 @@ export class ArticleTagService {
   }
 
   async findTag(tag: string) {
-    return await this.articleTagRepository.find({ where: { tag } });
+    return await this.articleTagRepository.findOne({ where: { tag } });
   }
 
   async findOne(tagId: number) {
@@ -68,17 +65,26 @@ export class ArticleTagService {
   async createFromArray(
     tags: CreateTagDto[],
     article: ArticleEntity,
-    userToken: string,
-  ) {
-    const Tags = tags.map(async (tag) => {
+    request: any,
+  ): Promise<ArticleTagEntity[]> {
+    const Tags = [];
+    tags.map(async (tag) => {
       const candidate = await this.findTag(tag.tag);
-      if (!candidate)
-        return await this.articleTagRepository.save({
-          tag: tag.tag,
-          articles: [article],
-        });
-      return candidate;
+      if (!candidate) {
+        Tags.push(
+          await this.create(
+            {
+              tag: tag.tag,
+              articles: [article],
+            },
+            request,
+          ),
+        );
+      } else {
+        Tags.push(candidate);
+      }
     });
-    await this.userService.addFavoriteTags(Tags, userToken);
+    await this.userService.addFavoriteTags(request, Tags);
+    return Tags;
   }
 }

@@ -68,7 +68,6 @@ export const MainPage = () => {
           {links.map((link: LinkModel) => (
             <li key={link.title}>
               <LinkItem {...link} />
-              <ArticleTagsGroup tags={[]} needToAdd />
             </li>
           ))}
         </ul>

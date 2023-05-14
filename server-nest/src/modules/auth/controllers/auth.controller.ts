@@ -1,6 +1,14 @@
 import { AuthService } from '../services/auth.service';
 import { CreateUserDto } from '../../user/dto/create-user.dto';
-import { Body, Controller, Get, Post, Request } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Post,
+  Request,
+} from '@nestjs/common';
+import { HTTPError } from '../../../helpers/error';
 
 @Controller()
 export class AuthController {
@@ -18,6 +26,8 @@ export class AuthController {
 
   @Post('/refreshToken')
   refreshToken(@Body() body: { refreshToken: string }) {
+    if (!body.refreshToken)
+      throw HTTPError('Отсутствует refresh-token', HttpStatus.BAD_REQUEST);
     return this.authService.checkRefreshToken(body.refreshToken);
   }
 

@@ -9,14 +9,14 @@ export const LinkApi = createApi({
   endpoints: (build) => ({
     parseInput: build.mutation<LinkModel[], string>({
       query: (url) => ({
-        url: "links/input",
+        url: "/links/input",
         method: requestMethods.POST,
         data: { url },
       }),
     }),
     getWebSites: build.query<WebSiteModel[], void>({
       query: () => ({
-        url: "links/websites",
+        url: "/links/websites",
         method: requestMethods.GET,
       }),
     }),

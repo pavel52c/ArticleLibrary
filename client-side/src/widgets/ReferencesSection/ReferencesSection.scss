@@ -1,9 +1,7 @@
-.FavoriteArticlesPage {
+.ReferencesSection {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  width: 100%;
-  height: 100%;
+  gap: 12px;
 
   &__list {
     display: flex;
@@ -14,6 +12,12 @@
   &__item {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+  }
+
+  &__links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
   }
 }

@@ -33,11 +33,10 @@ export const AuthApi = createApi({
             authorization: `Bearer ${authRes.accessToken}`,
           },
         });
+        if (!result.data) return { error: result.error as FetchBaseQueryError };
         _queryApi.dispatch(ProfileActions.setData(result.data as UserModel));
         _queryApi.dispatch(AuthActions.setLogin());
-        return result.data
-          ? { data: result.data as UserModel }
-          : { error: result.error as FetchBaseQueryError };
+        return { data: result.data as UserModel };
       },
     }),
     registration: build.mutation<UserModel, CreateUserDto>({
@@ -59,19 +58,36 @@ export const AuthApi = createApi({
             authorization: `Bearer ${authRes.accessToken}`,
           },
         });
+        if (!result.data) return { error: result.error as FetchBaseQueryError };
         _queryApi.dispatch(ProfileActions.setData(result.data as UserModel));
         _queryApi.dispatch(AuthActions.setLogin());
-        return result.data
-          ? { data: result.data as UserModel }
-          : { error: result.error as FetchBaseQueryError };
+        return { data: result.data as UserModel };
       },
     }),
-    refreshToken: build.query<AuthResponseModel, string>({
-      query: (data: string) => ({
-        url: "/refreshToken",
-        method: requestMethods.POST,
-        data: data,
-      }),
+    refreshToken: build.mutation<UserModel, { refreshToken: string }>({
+      async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
+        const refreshRes = await fetchWithBQ({
+          url: "/refreshToken",
+          method: requestMethods.POST,
+          data: _arg,
+        });
+        if (refreshRes.error)
+          return { error: refreshRes.error as FetchBaseQueryError };
+        const authRes = refreshRes.data as AuthResponseModel;
+        localStorage.setItem("accessToken", authRes.accessToken);
+        localStorage.setItem("refreshToken", authRes.refreshToken);
+        const result = await fetchWithBQ({
+          url: "/profile",
+          method: requestMethods.GET,
+          headers: {
+            authorization: `Bearer ${authRes.accessToken}`,
+          },
+        });
+        if (!result.data) return { error: result.error as FetchBaseQueryError };
+        _queryApi.dispatch(ProfileActions.setData(result.data as UserModel));
+        _queryApi.dispatch(AuthActions.setLogin());
+        return { data: result.data as UserModel };
+      },
     }),
     profile: build.query<UserModel, void>({
       query: () => ({
@@ -85,6 +101,6 @@ export const AuthApi = createApi({
 export const {
   useLoginMutation: useLogin,
   useRegistrationMutation: useRegistration,
-  useRefreshTokenQuery: useRefreshToken,
+  useRefreshTokenMutation: useRefreshToken,
   useProfileQuery: useGetProfile,
 } = AuthApi;

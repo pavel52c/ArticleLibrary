@@ -23,6 +23,14 @@ export class ArticleEntity {
   title: string;
 
   @ApiProperty({
+    example:
+      'https://www.sciencedirect.com/science/article/pii/S2352914823000072',
+    description: 'Ссылка на оригинал статьи статьи',
+  })
+  @Column()
+  originLink?: string;
+
+  @ApiProperty({
     example: [AbstractEntity],
     description: 'Раздел вступления',
   })

@@ -19,10 +19,13 @@ export class AbstractService {
   async createFromArray(
     abstractsDto: CreateAbstractDto[],
     article: ArticleEntity,
-  ): Promise<void> {
-    abstractsDto.forEach((abstractDto) =>
-      this.create({ ...abstractDto, article }),
-    );
+  ): Promise<AbstractEntity[]> {
+    const resultAbstracts: AbstractEntity[] = [];
+    for (const abstract of abstractsDto) {
+      const savedAbstract = await this.create({ ...abstract, article });
+      resultAbstracts.push(savedAbstract);
+    }
+    return resultAbstracts;
   }
 
   async findAll(): Promise<AbstractEntity[]> {

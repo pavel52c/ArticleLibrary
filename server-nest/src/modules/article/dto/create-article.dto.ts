@@ -6,7 +6,6 @@ import { CreateAbstractDto } from '../../abstract/dto/create-abstract.dto';
 import { CreateReferenceDto } from '../../reference/dto/create-reference.dto';
 import { ArticleTagEntity } from '../../articleTag/entities/articleTag.entity';
 import { CreateTagDto } from '../../articleTag/dto/createTagDto';
-import { CreateLinkDto } from '../../link/dto/create-link.dto';
 
 export class CreateArticleDto {
   @ApiProperty({
@@ -42,6 +41,5 @@ export class CreateArticleDto {
       'https://www.sciencedirect.com/science/article/pii/S2352914823000072',
     description: 'Ссылка на оригинал статьи статьи',
   })
-  @IsOptional()
-  readonly originLink?: CreateLinkDto;
+  readonly originLink?: string;
 }

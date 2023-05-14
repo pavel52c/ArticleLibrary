@@ -12,13 +12,7 @@ interface ProfileState {
 
 const initialState: ProfileState = {
   username: "",
-  articles: [
-    {
-      title: "kek",
-      abstracts: [],
-      references: [],
-    },
-  ],
+  articles: [],
   favoriteTags: [],
   banned: false,
 };

@@ -6,7 +6,8 @@ import "./ArticleTagsGroup.scss";
 
 interface ArticleTagsGroupProps {
   tags: ArticleTagModel[];
-  needToAdd: boolean;
+  needToAdd?: boolean;
+  onAdd?: () => void;
 }
 
 export const ArticleTagsGroup: React.FC<ArticleTagsGroupProps> = (props) => {
