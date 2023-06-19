@@ -17,9 +17,15 @@ const Layout = () => {
   const refreshToken = localStorage.getItem("refreshToken");
   const { isLogin } = useAppSelector((state) => state.auth);
   const [refreshFn, { isError }] = useRefreshToken();
+
   useEffect(() => {
     if (!isLogin && refreshToken && !isError) refreshFn({ refreshToken });
+    return () => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+    };
   }, []);
+
   return (
     <Container>
       <Header />

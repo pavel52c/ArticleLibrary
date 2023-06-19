@@ -19,7 +19,7 @@ export const parseFromInput = async ({ url, webSite = '', offset = 0 }) => {
 
         if (webSite.descriptionTarget) {
           const descriptions = Array.from(
-            document.querySelectorAll('.subtype-srctitle-link > span > span'),
+            document.querySelectorAll(webSite.descriptionTarget),
           ).map((description) => (description as HTMLLinkElement).innerHTML);
           values = values.map((value, index) => ({
             ...value,

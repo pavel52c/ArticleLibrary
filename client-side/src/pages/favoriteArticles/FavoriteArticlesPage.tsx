@@ -5,7 +5,7 @@ import { ArticleModel } from "@/entities/Article/model/ArticleModel";
 import { ContentLoadingWrapper } from "@/widgets/ContentLoadingWrapper/ContentLoadingWrapper";
 import { LinkItem } from "@/entities/Link/ui/LinkItem/LinkItem";
 import "./FavoriteArticlesPage.scss";
-import { ArticleTag } from "@/entities/ArticleTag/ui/ArticleTag";
+import { ArticleTagsGroup } from "@/widgets";
 
 export const FavoriteArticlesPage: React.FC = () => {
   const [search, setSearch] = useState<string>("");
@@ -14,7 +14,7 @@ export const FavoriteArticlesPage: React.FC = () => {
   const onSubmit = () => {};
 
   const filterFunction = (article: ArticleModel) =>
-    article.title.includes(search);
+    article.title?.includes(search);
 
   const searchBlockProps = {
     onChange: (value: string) => setSearch(value),
@@ -24,129 +24,68 @@ export const FavoriteArticlesPage: React.FC = () => {
   const articles = [
     {
       title:
-        "Nicotinamide mononucleotide (NMN) as an anti-aging health product – Promises and safety concerns",
-      references: [
-        {
-          title:
-            "United Nations (UN), Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights (ST/ESA/SER.A/430). New York, USA: United Nations; 2019.",
-          description: "",
-          links: [
-            {
-              url: "https://scholar.google.com/scholar?q=United Nations , Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights . New York, USA: United Nations; 2019.",
-              title: "Google Scholar",
-            },
-          ],
-        },
-        {
-          title:
-            "Age and age-related diseases: role of inflammation triggers and cytokines",
-          description: "Front Immunol, 9 (2018), p. 586",
-          links: [
-            {
-              url: "https://www.scopus.com/inward/record.url?eid=2-s2.0-85045243128&partnerID=10&rel=R3.0.0",
-              title: "View in Scopus",
-            },
-            {
-              url: "https://scholar.google.com/scholar?q=United Nations , Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights . New York, USA: United Nations; 2019.",
-              title: "Google Scholar",
-            },
-          ],
-        },
-        {
-          title: "Aging and anti-aging: a combo-endocrinology overview",
-          description: "Eur J Endocrinol, 176 (2017), pp. 283-308",
-          links: [
-            {
-              url: "https://scholar.google.com/scholar?q=United Nations , Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights . New York, USA: United Nations; 2019.",
-              title: "Google Scholar",
-            },
-          ],
-        },
-        {
-          title:
-            "Anti-aging medicine: the legal issues: legal issues associated with the current and future practice of anti-aging medicine",
-          description:
-            "J Gerontol A Biol Sci Med Sci, 59 (7) (2004), pp. B674-B681",
-          links: [
-            {
-              url: "https://www.scopus.com/inward/record.url?eid=2-s2.0-85045243128&partnerID=10&rel=R3.0.0",
-              title: "View in Scopus",
-            },
-            {
-              url: "https://scholar.google.com/scholar?q=United Nations , Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights . New York, USA: United Nations; 2019.",
-              title: "Google Scholar",
-            },
-          ],
-        },
-      ],
+        "Application of data mining combined with power data in assessment and prevention of regional atmospheric pollution",
+      description: "Energy Reports 22 February 2023",
       tags: [
         {
-          tag: "Химия",
-          id: 1,
+          id: 0,
+          tag: "data mining",
         },
       ],
     },
     {
       title:
-        "The “Resus:Station”: The use of clinical simulations in a randomised crossover study to evaluate a novel resuscitation trolley",
-      references: [
-        {
-          title:
-            "United Nations (UN), Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights (ST/ESA/SER.A/430). New York, USA: United Nations; 2019.",
-          description: "",
-          links: [
-            {
-              url: "https://scholar.google.com/scholar?q=United Nations , Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights . New York, USA: United Nations; 2019.",
-              title: "Google Scholar",
-            },
-          ],
-        },
-        {
-          title:
-            "Age and age-related diseases: role of inflammation triggers and cytokines",
-          description: "Front Immunol, 9 (2018), p. 586",
-          links: [
-            {
-              url: "https://www.scopus.com/inward/record.url?eid=2-s2.0-85045243128&partnerID=10&rel=R3.0.0",
-              title: "View in Scopus",
-            },
-            {
-              url: "https://scholar.google.com/scholar?q=United Nations , Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights . New York, USA: United Nations; 2019.",
-              title: "Google Scholar",
-            },
-          ],
-        },
-        {
-          title: "Aging and anti-aging: a combo-endocrinology overview",
-          description: "Eur J Endocrinol, 176 (2017), pp. 283-308",
-          links: [
-            {
-              url: "https://scholar.google.com/scholar?q=United Nations , Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights . New York, USA: United Nations; 2019.",
-              title: "Google Scholar",
-            },
-          ],
-        },
-        {
-          title:
-            "Anti-aging medicine: the legal issues: legal issues associated with the current and future practice of anti-aging medicine",
-          description:
-            "J Gerontol A Biol Sci Med Sci, 59 (7) (2004), pp. B674-B681",
-          links: [
-            {
-              url: "https://www.scopus.com/inward/record.url?eid=2-s2.0-85045243128&partnerID=10&rel=R3.0.0",
-              title: "View in Scopus",
-            },
-            {
-              url: "https://scholar.google.com/scholar?q=United Nations , Department of Economic and Social Affairs, Population Division. World population ageing 2019: highlights . New York, USA: United Nations; 2019.",
-              title: "Google Scholar",
-            },
-          ],
-        },
-      ],
+        "Sequential data mining of infection patterns as predictors for onset of type 1 diabetes in genetically at-risk individuals",
+      description:
+        "International Journal of Educational DevelopmentAvailable online 19 May 2023",
       tags: [
         {
-          tag: "Медицина",
+          id: 0,
+          tag: "data mining",
+        },
+      ],
+    },
+    {
+      title:
+        "Smart Trip Prediction Model for Metro Traffic Control Using Data Mining Techniques",
+      description: "Procedia Computer Science13 January 2023",
+      tags: [
+        {
+          id: 0,
+          tag: "data mining",
+        },
+      ],
+    },
+    {
+      title:
+        "An enhanced deterministic K-Means clustering algorithm for cancer subtype prediction from gene expression data",
+      description: "Computers in Biology and Medicine1 December 2017",
+      tags: [
+        {
           id: 1,
+          tag: "k-means",
+        },
+      ],
+    },
+    {
+      title:
+        "Classification of Indian power coals using K-means clustering and Self Organizing Map neural network",
+      description: "FuelJanuary 2011",
+      tags: [
+        {
+          id: 1,
+          tag: "k-means",
+        },
+      ],
+    },
+    {
+      title:
+        "A DT-CWT and Data mining based approach for High Impedance Fault Diagnosis in Micro-grid System",
+      description: "Procedia Computer Science13 January 2023",
+      tags: [
+        {
+          id: 0,
+          tag: "data-minig",
         },
       ],
     },
@@ -159,12 +98,8 @@ export const FavoriteArticlesPage: React.FC = () => {
         <ul className="FavoriteArticlesPage__list">
           {articles.filter(filterFunction).map((article: ArticleModel) => (
             <li key={article.title} className="FavoriteArticlesPage__item">
-              <LinkItem
-                url=""
-                title={article.title}
-                description={article.title}
-              />
-              <ArticleTag {...article.tags[0]} />
+              <LinkItem url="" title={article.title} />
+              <ArticleTagsGroup tags={article.tags} />
             </li>
           ))}
         </ul>

@@ -5,6 +5,6 @@ import { ArticleTagModel } from "@/entities/ArticleTag/model/ArticleTagModel";
 export interface ArticleModel {
   title: string;
   abstracts?: AbstractModel[];
-  references: ReferenceModel[];
+  references?: ReferenceModel[];
   tags: ArticleTagModel[];
 }

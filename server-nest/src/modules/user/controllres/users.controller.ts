@@ -6,8 +6,6 @@ import {
   Param,
   Post,
   UseGuards,
-  Headers,
-  Request,
   Req,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
